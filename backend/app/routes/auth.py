@@ -5,6 +5,9 @@ from werkzeug.security import check_password_hash
 from ..common.exceptions import AppError
 from ..common.response import success
 from ..decorators.roles import get_current_user
+from ..models.equipment import LabEquipment
+from ..models.lab import LabInfo
+from ..models.report import LabReport
 from ..models.user import SysUser
 from ..schemas.auth import LoginSchema
 
@@ -33,3 +36,32 @@ def profile():
     user = get_current_user()
     return success(user.to_dict())
 
+
+@auth_bp.get("/public-overview")
+def public_overview():
+    total = LabReport.query.count()
+    pending = LabReport.query.filter(LabReport.review_status == "pending").count()
+    approved = LabReport.query.filter(LabReport.review_status == "approved").count()
+    rejected = LabReport.query.filter(LabReport.review_status == "rejected").count()
+    abnormal = LabReport.query.filter(
+        (LabReport.hygiene_status == "abnormal")
+        | (LabReport.power_status == "abnormal")
+        | (LabReport.network_status == "abnormal")
+        | (LabReport.door_window_status == "abnormal")
+        | (LabReport.fire_status == "abnormal")
+        | (LabReport.equipment_status == "abnormal")
+        | ((LabReport.abnormal_desc.isnot(None)) & (LabReport.abnormal_desc != ""))
+    ).count()
+    labs = LabInfo.query.count()
+    equipments = LabEquipment.query.count()
+    return success(
+        {
+            "total": total,
+            "pending": pending,
+            "approved": approved,
+            "rejected": rejected,
+            "abnormal": abnormal,
+            "labs": labs,
+            "equipments": equipments,
+        }
+    )

@@ -17,15 +17,15 @@
           <div class="mock-grid">
             <div class="mock-card">
               <small>数据上报</small>
-              <b>填报</b>
+              <b>{{ overview.total }}</b>
             </div>
             <div class="mock-card warning">
-              <small>审核管理</small>
-              <b>流转</b>
+              <small>待审核</small>
+              <b>{{ overview.pending }}</b>
             </div>
             <div class="mock-card success">
-              <small>统计分析</small>
-              <b>图表</b>
+              <small>已通过</small>
+              <b>{{ overview.approved }}</b>
             </div>
           </div>
           <div class="mock-chart">
@@ -37,9 +37,9 @@
             <i style="height: 62%"></i>
           </div>
           <div class="mock-status">
-            <span>实验室信息</span>
-            <span>设备台账</span>
-            <span>公告通知</span>
+            <span>异常 {{ overview.abnormal }} 条</span>
+            <span>实验室 {{ overview.labs }} 间</span>
+            <span>设备 {{ overview.equipments }} 台</span>
           </div>
         </div>
       </div>
@@ -63,9 +63,10 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import { getPublicOverview } from '../api/auth'
 import { useUserStore } from '../stores/user'
 
 const route = useRoute()
@@ -76,6 +77,14 @@ const loading = ref(false)
 const form = reactive({
   username: 'admin',
   password: 'admin123'
+})
+const overview = reactive({
+  total: '-',
+  pending: '-',
+  approved: '-',
+  abnormal: '-',
+  labs: '-',
+  equipments: '-'
 })
 
 const rules = {
@@ -94,6 +103,23 @@ async function handleLogin() {
     loading.value = false
   }
 }
+
+async function loadOverview() {
+  try {
+    Object.assign(overview, await getPublicOverview())
+  } catch {
+    Object.assign(overview, {
+      total: '-',
+      pending: '-',
+      approved: '-',
+      abnormal: '-',
+      labs: '-',
+      equipments: '-'
+    })
+  }
+}
+
+onMounted(loadOverview)
 </script>
 
 <style scoped>
