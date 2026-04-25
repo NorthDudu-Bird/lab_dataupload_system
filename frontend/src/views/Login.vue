@@ -3,7 +3,7 @@
     <div class="login-panel">
       <div class="login-visual">
         <div class="visual-copy">
-          <div class="visual-badge">SMART LAB PLATFORM</div>
+          <div class="visual-badge">LAB REPORT SYSTEM</div>
           <div class="system-name">实验室数据上报系统</div>
           <div class="system-desc">Lab Data Reporting System</div>
         </div>
@@ -12,20 +12,20 @@
             <span></span>
             <span></span>
             <span></span>
-            <strong>运行监管驾驶舱</strong>
+            <strong>上报数据概览</strong>
           </div>
           <div class="mock-grid">
             <div class="mock-card">
               <small>今日上报</small>
-              <b>96%</b>
+              <b>12</b>
             </div>
             <div class="mock-card warning">
               <small>待审核</small>
               <b>2</b>
             </div>
             <div class="mock-card success">
-              <small>健康指数</small>
-              <b>91</b>
+              <small>已通过</small>
+              <b>9</b>
             </div>
           </div>
           <div class="mock-chart">
@@ -37,9 +37,9 @@
             <i style="height: 62%"></i>
           </div>
           <div class="mock-status">
-            <span>网络正常</span>
-            <span>消防正常</span>
-            <span>设备巡检中</span>
+            <span>实验室 A101</span>
+            <span>设备记录 8 条</span>
+            <span>异常待处理 1 条</span>
           </div>
         </div>
       </div>
