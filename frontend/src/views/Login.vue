@@ -12,20 +12,20 @@
             <span></span>
             <span></span>
             <span></span>
-            <strong>上报数据概览</strong>
+            <strong>系统功能概览</strong>
           </div>
           <div class="mock-grid">
             <div class="mock-card">
-              <small>今日上报</small>
-              <b>12</b>
+              <small>数据上报</small>
+              <b>填报</b>
             </div>
             <div class="mock-card warning">
-              <small>待审核</small>
-              <b>2</b>
+              <small>审核管理</small>
+              <b>流转</b>
             </div>
             <div class="mock-card success">
-              <small>已通过</small>
-              <b>9</b>
+              <small>统计分析</small>
+              <b>图表</b>
             </div>
           </div>
           <div class="mock-chart">
@@ -37,9 +37,9 @@
             <i style="height: 62%"></i>
           </div>
           <div class="mock-status">
-            <span>实验室 A101</span>
-            <span>设备记录 8 条</span>
-            <span>异常待处理 1 条</span>
+            <span>实验室信息</span>
+            <span>设备台账</span>
+            <span>公告通知</span>
           </div>
         </div>
       </div>
